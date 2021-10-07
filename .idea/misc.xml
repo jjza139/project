@@ -5,6 +5,8 @@
       <map>
         <entry key="app/src/main/res/layout/activity_aclog.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/activity_registeruser.xml" value="0.25052083333333336" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.10078812490580417" />
+        <entry key="app/src/main/res/layout/menu.xml" value="0.21467391304347827" />
       </map>
     </option>
   </component>

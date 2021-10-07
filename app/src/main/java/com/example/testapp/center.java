@@ -7,13 +7,27 @@ import android.view.View;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class center extends AppCompatActivity {
     // private View decorView;
+//    private FirebaseUser uAuth;
+//    private DatabaseReference reference;
+//    private String UserId;
+//    public TextView greeting;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +35,9 @@ public class center extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.menu);
+//        uAuth = FirebaseAuth.getInstance().getCurrentUser();
+//        reference = FirebaseDatabase.getInstance().getReference("Users");
+//        UserId = uAuth.getUid();
         BottomNavigationView bottomNav = findViewById(R.id.navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         //I added this if statement to keep the selected fragment when rotating the device
@@ -28,6 +45,26 @@ public class center extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.home,
                     new home()).commit();
         }
+//
+//        greeting = (TextView) findViewById(R.id.nameUser);
+//
+//        reference.child(UserId).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                Userinfo userpofile = snapshot.getValue(Userinfo.class);
+//
+//                if(userpofile != null){
+//                    String Username = userpofile.name;
+//                    greeting.setText(Username);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast.makeText(center.this,"Failed",Toast.LENGTH_LONG).show();
+//            }
+//        });
+
     }
 
 

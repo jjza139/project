@@ -53,7 +53,8 @@
                             android:textSize="20dp" />
 
                         <TextView
-                            android:layout_width="46dp"
+                            android:id="@+id/nameUser"
+                            android:layout_width="match_parent"
                             android:layout_height="28dp"
                             android:text="name"
                             android:textColor="#fff"
