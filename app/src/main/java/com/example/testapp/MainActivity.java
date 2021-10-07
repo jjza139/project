@@ -2,76 +2,43 @@ package com.example.testapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     // private View decorView;
-    private  TextView register;
+    private Button signin;
+    private  TextView register,forgot;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_aclog);
-        register = (TextView) findViewById(R.id.register);
+        signin      = (Button) findViewById(R.id.btn_signin);
+        register    = (TextView) findViewById(R.id.btn_register);
+        forgot      = (TextView) findViewById(R.id.btn_forgot);
+        signin.setOnClickListener(this);
         register.setOnClickListener(this);
-        /*
-        BottomNavigationView bottomNav = findViewById(R.id.navigation);
-        bottomNav.setOnNavigationItemSelectedListener(navListener);
-        //I added this if statement to keep the selected fragment when rotating the device
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.home,
-                    new home()).commit();
-        }
+        forgot.setOnClickListener(this);
 
-         */
     }
     public void onClick(View v){
         switch (v.getId()){
-            case R.id.register:
+            case R.id.btn_register:
+                //go to register
                 startActivity(new Intent(this,registeruser.class));
+                break;
+            case R.id.btn_signin:
+                //go to app
+                startActivity(new Intent(this ,center.class));
+                break;
+            case R.id.btn_forgot:
+               //go to forgot
+                startActivity(new Intent(this ,center.class));
                 break;
         }
     }
-
-
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Fragment selectedFragment = null;
-                    switch (item.getItemId()) {
-                        case R.id.home:
-                            selectedFragment = new home();
-                            break;
-                        case R.id.addmoney:
-                            selectedFragment = new addmoney();
-                            break;
-                        case R.id.qr:
-                            selectedFragment = new qr();
-                            break;
-                        case R.id.history:
-                            selectedFragment = new history();
-                            break;
-                        case R.id.user:
-                            selectedFragment = new user();
-                            break;
-                        default:
-                            selectedFragment = new home();
-                            break;
-                    }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.home,
-                            selectedFragment).addToBackStack(null).commit();
-                    return true;
-                }
-            };
 }

@@ -1,5 +1,6 @@
 package com.example.testapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,9 +28,10 @@ public class registeruser extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registeruser);
-
+        singin = (TextView) findViewById(R.id.btn_signin);
+        singin.setOnClickListener(this);
         mAuth = FirebaseAuth.getInstance();
-        registerUser = (Button) findViewById(R.id.bt_register);
+        registerUser = (Button) findViewById(R.id.btn_create);
         registerUser.setOnClickListener(this);
         editname = (EditText) findViewById(R.id.editName);
         editemail = (EditText) findViewById(R.id.editEmailAddress);
@@ -39,9 +41,11 @@ public class registeruser extends AppCompatActivity implements View.OnClickListe
 
     public void onClick(View v){
         switch (v.getId()){
-            case R.id.bt_register:
+            case R.id.btn_create:
                   registeruser();
                 break;
+            case R.id.btn_signin:
+                    startActivity(new Intent(this,MainActivity.class));
         }
     }
     private void registeruser(){

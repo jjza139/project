@@ -47,7 +47,7 @@
             android:layout_height="24dp" />
 
         <TextView
-            android:id="@+id/signin"
+            android:id="@+id/btn_create"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -139,7 +139,7 @@
             android:inputType="number" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_forgot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:insetLeft="150dp"

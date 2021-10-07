@@ -107,7 +107,7 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/btn_forgot"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -115,7 +115,7 @@
                     app:backgroundTint="#00BCD4" />
 
                 <Button
-                    android:id="@+id/bt_register"
+                    android:id="@+id/btn_signin"
                     android:layout_width="match_parent"
                     android:layout_height="59dp"
                     android:layout_margin="20dp"
@@ -124,7 +124,7 @@
                     app:backgroundTint="#159EAF" />
 
                 <TextView
-                    android:id="@+id/register"
+                    android:id="@+id/btn_register"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
@@ -132,15 +132,6 @@
                     android:textSize="15dp" />
 
             </LinearLayout>
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:text="sing up"
-                app:backgroundTint="#00BCD4"
-                app:rippleColor="#FFFFFF" />
 
         </LinearLayout>
     </LinearLayout>
