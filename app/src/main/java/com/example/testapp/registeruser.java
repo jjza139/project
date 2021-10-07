@@ -53,6 +53,10 @@ public class registeruser extends AppCompatActivity implements View.OnClickListe
                     startActivity(new Intent(this,MainActivity.class));
         }
     }
+    private void go2main(){
+        startActivity(new Intent(this,MainActivity.class));
+    }
+
     private void registeruser(){
         String Name =editname.getText().toString().trim();
         String password =editpassword.getText().toString().trim();
@@ -103,6 +107,7 @@ public class registeruser extends AppCompatActivity implements View.OnClickListe
                                     if(task.isSuccessful()){
                                         Toast.makeText(registeruser.this,"Register Success",Toast.LENGTH_LONG).show();
                                         progressBar.setVisibility(View.GONE);
+                                        go2main();
                                     }
                                     else
                                         Toast.makeText(registeruser.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
