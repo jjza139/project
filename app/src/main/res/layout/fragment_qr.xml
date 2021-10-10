@@ -14,6 +14,17 @@
         android:layout_height="match_parent"
         android:focusableInTouchMode="false">
 
+        <TextView
+            android:layout_width="105dp"
+            android:layout_height="31dp"
+            android:layout_marginTop="28dp"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.604"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
         <ImageView
             android:id="@+id/image_user4"
             android:layout_width="58dp"
@@ -25,7 +36,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/User_Name"
             android:layout_width="70dp"
             android:layout_height="30dp"
             android:layout_marginTop="32dp"
@@ -48,7 +59,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.516"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+            app:layout_constraintTop_toBottomOf="@+id/User_Name" />
 
         <ImageView
             android:id="@+id/imageView"

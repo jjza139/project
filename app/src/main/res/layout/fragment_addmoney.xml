@@ -48,11 +48,11 @@
             android:inputType="textPersonName"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintStart_toStartOf="@+id/User_email"
+            app:layout_constraintTop_toBottomOf="@+id/User_email" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/User_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"

@@ -1,48 +1,48 @@
 package com.example.testapp;
 
+import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
+
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.MenuItem;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 
-public class user extends Fragment {
-
+public class user extends Fragment  {
+    public TextView user_name,user_email ;
+    private FirebaseAuth mAuth;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_user, container, false);
+        user_name = (TextView) v.findViewById(R.id.User_Name);
+        user_name.setText(center.getName());
+        user_email = (TextView) v.findViewById(R.id.User_email);
+        user_email.setText(center.getEmail());
         NavigationView  Nav2 = v.findViewById(R.id.navigationview);
         Nav2.setNavigationItemSelectedListener(navListener);
         // Inflate the layout for this fragment
         return v;
     }
+
+
+
 
 
     private NavigationView.OnNavigationItemSelectedListener navListener =

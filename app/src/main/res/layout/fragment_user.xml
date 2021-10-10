@@ -35,6 +35,7 @@
                 app:srcCompat="@drawable/ic_baseline_account_box_24" />
 
             <TextView
+                android:id="@+id/User_Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Full name"
@@ -42,7 +43,7 @@
                 android:textColor="@color/black" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/User_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Email"

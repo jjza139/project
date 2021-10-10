@@ -48,9 +48,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         register.setOnClickListener(this);
         forgot.setOnClickListener(this);
 
-
-
     }
+//    public void onStart() {
+//        super.onStart();
+//        // Check if user is signed in (non-null) and update UI accordingly.
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        if(currentUser != null){
+//            sendUsertoCenter();
+//        }
+//    }
 
     private void validateLogin() {
         String password =editpassword.getText().toString().trim();
@@ -107,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_forgot:
                //go to forgot
-                startActivity(new Intent(this ,center.class));
+                startActivity(new Intent(this ,forgot.class));
                 break;
         }
     }

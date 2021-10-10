@@ -53,7 +53,7 @@
                             android:textSize="20dp" />
 
                         <TextView
-                            android:id="@+id/nameUser"
+                            android:id="@+id/User_Name"
                             android:layout_width="match_parent"
                             android:layout_height="28dp"
                             android:text="name"
