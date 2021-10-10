@@ -49,14 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         forgot.setOnClickListener(this);
 
     }
-//    public void onStart() {
-//        super.onStart();
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        if(currentUser != null){
-//            sendUsertoCenter();
-//        }
-//    }
+
 
     private void validateLogin() {
         String password =editpassword.getText().toString().trim();
