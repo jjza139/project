@@ -31,6 +31,7 @@ public class user extends Fragment  {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_user, container, false);
+        mAuth = FirebaseAuth.getInstance();
         user_name = (TextView) v.findViewById(R.id.User_Name);
         user_name.setText(center.getName());
         user_email = (TextView) v.findViewById(R.id.User_email);
@@ -41,9 +42,17 @@ public class user extends Fragment  {
         return v;
     }
 
-
-
-
+    public void signOut() {
+        // [START auth_sign_out]
+        FirebaseAuth.getInstance().signOut();
+        // [END auth_sign_out]
+    }
+    public void logout() {
+        if (mAuth.getCurrentUser() != null)
+            mAuth.signOut();
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        startActivity(intent);
+    }
 
     private NavigationView.OnNavigationItemSelectedListener navListener =
             new NavigationView.OnNavigationItemSelectedListener() {
@@ -66,6 +75,9 @@ public class user extends Fragment  {
                             break;
                         case R.id.setpassword:
                             selectedFragment = new setpassword();
+                            break;
+                        case R.id.out:
+                            logout();
                             break;
                         default:
                             selectedFragment = new user();

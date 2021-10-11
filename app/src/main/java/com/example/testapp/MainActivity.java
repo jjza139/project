@@ -47,7 +47,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         register.setOnClickListener(this);
         forgot.setOnClickListener(this);
+    }
 
+    protected void onStart(){
+        super.onStart();
+        checkCurrentUser();
+    }
+
+    public void checkCurrentUser() {
+        // [START check_current_user]
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            sendUsertoCenter();
+        } else {
+            // No user is signed in
+        }
+        // [END check_current_user]
     }
 
 
@@ -106,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_forgot:
                //go to forgot
-                startActivity(new Intent(this ,forgot.class));
+               startActivity(new Intent(this ,forgot.class));
                 break;
         }
     }

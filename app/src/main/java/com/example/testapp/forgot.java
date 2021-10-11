@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class forgot extends AppCompatActivity implements View.OnClickListener{
     // private View decorView;
-    private Button reset;
+    private Button reset,login;
     private FirebaseAuth mAuth;
     private EditText editemail;
 
@@ -35,6 +35,8 @@ public class forgot extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_got);
         reset = findViewById(R.id.btn_reset);
         reset.setOnClickListener(this);
+        login =findViewById(R.id.login);
+        login.setOnClickListener(this);
         editemail =findViewById(R.id.EditEmail);
         mAuth = FirebaseAuth.getInstance();
 
@@ -47,7 +49,9 @@ public class forgot extends AppCompatActivity implements View.OnClickListener{
                 resetPassword();
                 // startActivity(new Intent(this,MainActivity.class));
                 break;
-
+            case R.id.login:
+                startActivity(new Intent(this,MainActivity.class));
+                break;
         }
     }
 //

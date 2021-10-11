@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 public class registeruser extends AppCompatActivity implements View.OnClickListener{
     private FirebaseAuth mAuth;
     private EditText editname,editemail,editphone,editpassword;
-    private TextView singin,registerUser,status;
+    private TextView singin,registerUser;
     private ProgressBar progressBar;
 
     @Override
@@ -32,7 +32,7 @@ public class registeruser extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registeruser);
         progressBar = findViewById(R.id.progressBar);
-        status = (TextView)findViewById(R.id.Status);
+       // status = (TextView)findViewById(R.id.Status);
         singin = (TextView) findViewById(R.id.btn_signin);
         singin.setOnClickListener(this);
         mAuth = FirebaseAuth.getInstance();

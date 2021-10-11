@@ -19,12 +19,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class center extends AppCompatActivity {
-    private static String Username ,Email;
+    public static String Username ,Email;
     // private View decorView;
     private FirebaseUser uAuth;
     private DatabaseReference reference;
     private String UserId;
-    public TextView greeting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +35,8 @@ public class center extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("Users");
         UserId = uAuth.getUid();
 
+
+       // greeting = (TextView) findViewById(R.id.nameUser);
         BottomNavigationView bottomNav = findViewById(R.id.navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         //I added this if statement to keep the selected fragment when rotating the device
@@ -44,17 +45,15 @@ public class center extends AppCompatActivity {
                     new home()).commit();
         }
 
-       // greeting = (TextView) findViewById(R.id.nameUser);
-
         reference.child(UserId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Userinfo userprofile = snapshot.getValue(Userinfo.class);
 
-                if(userprofile != null){
-                   Username = userprofile.name;
-                   Email =userprofile.email;
-                 //   greeting.setText(Username);
+                if(userprofile != null) {
+                    Username = userprofile.name;
+                    Email = userprofile.email;
+                    //   greeting.setText(Username);
                 }
             }
 
@@ -66,6 +65,10 @@ public class center extends AppCompatActivity {
 
     }
 
+    protected void onStart(){
+        super.onStart();
+
+    }
 
     public static String getName(){
         return Username;
@@ -74,6 +77,9 @@ public class center extends AppCompatActivity {
         return Email;
     }
 
+    private void go2main(){
+        startActivity(new Intent(this,MainActivity.class));
+    }
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -93,6 +99,8 @@ public class center extends AppCompatActivity {
                             selectedFragment = new history();
                             break;
                         case R.id.user:
+//                            FirebaseAuth.getInstance().signOut();
+//                            go2main();
                             selectedFragment = new user();
                             break;
                         default:
