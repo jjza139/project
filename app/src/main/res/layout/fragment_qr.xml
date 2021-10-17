@@ -15,15 +15,16 @@
         android:focusableInTouchMode="false">
 
         <TextView
-            android:layout_width="105dp"
-            android:layout_height="31dp"
-            android:layout_marginTop="28dp"
+            android:id="@+id/money"
+            android:layout_width="100dp"
+            android:layout_height="27dp"
+            android:layout_marginTop="4dp"
             android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.604"
+            app:layout_constraintHorizontal_bias="0.723"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintTop_toBottomOf="@+id/User_Name" />
 
         <ImageView
             android:id="@+id/image_user4"
@@ -37,27 +38,25 @@
 
         <TextView
             android:id="@+id/User_Name"
-            android:layout_width="70dp"
-            android:layout_height="30dp"
+            android:layout_width="199dp"
+            android:layout_height="25dp"
             android:layout_marginTop="32dp"
-            android:text="Name : "
             android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.316"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
         <TextView
             android:id="@+id/textView10"
-            android:layout_width="202dp"
+            android:layout_width="100dp"
             android:layout_height="27dp"
             android:layout_marginTop="4dp"
-            android:text="balance : 500.00 THB"
+            android:text="balance :"
             android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.516"
+            app:layout_constraintHorizontal_bias="0.347"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/User_Name" />
 

@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -20,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class center extends AppCompatActivity {
     public static String Username ,Email;
+    public static int Money;
     // private View decorView;
     private FirebaseUser uAuth;
     private DatabaseReference reference;
@@ -53,7 +53,10 @@ public class center extends AppCompatActivity {
                 if(userprofile != null) {
                     Username = userprofile.name;
                     Email = userprofile.email;
+                    Money = userprofile.money;
                     //   greeting.setText(Username);
+                }else{
+
                 }
             }
 
@@ -76,7 +79,9 @@ public class center extends AppCompatActivity {
     public static String getEmail(){
         return Email;
     }
-
+    public static int getMoney(){
+        return Money;
+    }
     private void go2main(){
         startActivity(new Intent(this,MainActivity.class));
     }

@@ -42,19 +42,15 @@ public class user extends Fragment  {
         return v;
     }
 
-    public void signOut() {
-        // [START auth_sign_out]
+    private void logout() {
         FirebaseAuth.getInstance().signOut();
-        // [END auth_sign_out]
-    }
-    public void logout() {
-        if (mAuth.getCurrentUser() != null)
-            mAuth.signOut();
-        Intent intent = new Intent(getActivity(), MainActivity.class);
+        Intent intent = new Intent(getActivity(),MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+
     }
 
-    private NavigationView.OnNavigationItemSelectedListener navListener =
+    private final NavigationView.OnNavigationItemSelectedListener navListener =
             new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
 
@@ -77,6 +73,7 @@ public class user extends Fragment  {
                             selectedFragment = new setpassword();
                             break;
                         case R.id.out:
+                            selectedFragment = new user();
                             logout();
                             break;
                         default:

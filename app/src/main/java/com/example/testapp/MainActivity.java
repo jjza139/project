@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     // private View decorView;
     private Button signin;
-    private  TextView register,forgot;
+    private  TextView register,forgot,banner;
     private EditText editemail,editpassword;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_aclog);
         progressBar = findViewById(R.id.progressBar);
         mAuth = FirebaseAuth.getInstance();
+        banner = findViewById(R.id.Banner);
         signin      = (Button) findViewById(R.id.btn_signin);
         register    = (TextView) findViewById(R.id.btn_register);
         forgot      = (TextView) findViewById(R.id.btn_forgot);
@@ -45,22 +46,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editpassword = (EditText) findViewById(R.id.passLogin);
         signin.setOnClickListener(this);
 
+
         register.setOnClickListener(this);
         forgot.setOnClickListener(this);
     }
 
     protected void onStart(){
         super.onStart();
-        checkCurrentUser();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        checkCurrentUser(currentUser);
     }
 
-    public void checkCurrentUser() {
+    public void checkCurrentUser(FirebaseUser user) {
         // [START check_current_user]
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
+        if(user != null){
             sendUsertoCenter();
-        } else {
-            // No user is signed in
         }
         // [END check_current_user]
     }
@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void sendUsertoCenter() {
+//           startActivity(new Intent(this,center.class));
         Intent intent = new Intent(this,center.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
