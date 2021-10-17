@@ -55,9 +55,34 @@ public class setpassword extends Fragment {
 
 
     public void updatePassword() {
+
+
         // [START update_password]
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String currentPassword = password.getText().toString().trim();
         String newPassword = new_password.getText().toString().trim();
+        String confirmPassword = confirm_password.getText().toString().trim();
+        if (currentPassword.isEmpty()|| currentPassword.length() < 6){
+            password.setError("Password is requied!");
+            password.requestFocus();
+            return;
+        }
+        if (newPassword.isEmpty()|| newPassword.length() < 6){
+            new_password.setError("Password is requied!");
+            new_password.requestFocus();
+            return;
+        }
+        if (confirmPassword.isEmpty()|| confirmPassword.length() < 6){
+            confirm_password.setError("Password is requied!");
+            confirm_password.requestFocus();
+            return;
+        }
+        if (!newPassword.equals(confirmPassword)){
+            new_password.setError("Password does not matches!");
+            confirm_password.setError("Password does not matches!");
+            new_password.requestFocus();
+            return;
+        }
 
         user.updatePassword(newPassword)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
