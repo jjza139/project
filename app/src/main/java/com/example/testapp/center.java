@@ -35,7 +35,6 @@ public class center extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("Users");
         UserId = uAuth.getUid();
 
-
        // greeting = (TextView) findViewById(R.id.nameUser);
         BottomNavigationView bottomNav = findViewById(R.id.navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
@@ -44,7 +43,10 @@ public class center extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.home,
                     new home()).commit();
         }
+        updateuser();
 
+    }
+    private void updateuser(){
         reference.child(UserId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -54,7 +56,8 @@ public class center extends AppCompatActivity {
                     Username = userprofile.name;
                     Email = userprofile.email;
                     Money = userprofile.money;
-                    //   greeting.setText(Username);
+                    //greeting.setText(Username);
+
                 }else{
 
                 }
@@ -65,8 +68,8 @@ public class center extends AppCompatActivity {
                 Toast.makeText(center.this,"Failed",Toast.LENGTH_LONG).show();
             }
         });
-
     }
+
 
     protected void onStart(){
         super.onStart();
@@ -104,11 +107,10 @@ public class center extends AppCompatActivity {
                             selectedFragment = new history();
                             break;
                         case R.id.user:
-//                            FirebaseAuth.getInstance().signOut();
-//                            go2main();
                             selectedFragment = new user();
                             break;
                         default:
+                            updateuser();
                             selectedFragment = new home();
                             break;
                     }
