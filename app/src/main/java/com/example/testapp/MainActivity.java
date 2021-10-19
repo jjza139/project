@@ -1,6 +1,7 @@
 package com.example.testapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -35,6 +36,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+//        Intent intent = getIntent();
+//        String data = intent.getDataString();
+//        String code[] = data.split("=");
+
         setContentView(R.layout.activity_aclog);
         progressBar = findViewById(R.id.progressBar);
         mAuth = FirebaseAuth.getInstance();
@@ -45,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editemail = (EditText) findViewById(R.id.emailLogin);
         editpassword = (EditText) findViewById(R.id.passLogin);
         signin.setOnClickListener(this);
-
+//        editemail.setText(code[1]);
 
         register.setOnClickListener(this);
         forgot.setOnClickListener(this);
@@ -60,8 +65,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void checkCurrentUser(FirebaseUser user) {
         // [START check_current_user]
         if(user != null){
-            sendUsertoCenter();
+            //sendUsertoCenter();
+            sendUsertoapi();
         }
+
         // [END check_current_user]
     }
 
@@ -101,6 +108,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+    }
+
+    private void sendUsertoapi() {
+//           startActivity(new Intent(this,center.class));
+        Intent intent = new Intent(this,testapi.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     private void sendUsertoCenter() {

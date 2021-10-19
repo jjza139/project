@@ -13,13 +13,17 @@
         <activity android:name=".registeruser"></activity>
         <activity android:name=".forgot"></activity>
         <activity android:name=".center"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".testapi">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:host="testapp" android:scheme="myapp" android:pathPattern=".*"></data>
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

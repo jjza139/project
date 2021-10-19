@@ -1,6 +1,7 @@
 package com.example.testapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -38,6 +39,7 @@ public class home extends Fragment  {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         greeting = (TextView) v.findViewById(R.id.User_Name);
         updateuser();
+
         return v;
     }
 
