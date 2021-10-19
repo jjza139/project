@@ -80,7 +80,7 @@
                         android:src="@drawable/ic_baseline_add_24" />
 
                     <EditText
-                        android:id="@+id/editName"
+                        android:id="@+id/editplate"
                         android:layout_width="wrap_content"
                         android:layout_height="57dp"
                         android:layout_marginEnd="10dp"
