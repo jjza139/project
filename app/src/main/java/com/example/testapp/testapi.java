@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -106,7 +107,19 @@ public class testapi extends AppCompatActivity {
             public void onFailure(@NotNull Call call, @NotNull IOException e) { }
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                result.setText(response.body().string());
+                a=response.body().string();
+                try {
+                    JSONObject json = new JSONObject(a);
+                    JSONObject link = new JSONObject(json.getString("data"));
+                    result.setText(link.getString("callbackUrl"));
+                    go2scb(link.getString("callbackUrl"));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                // a=response.body().string();
+
 
             }
         });
