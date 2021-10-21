@@ -6,13 +6,36 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/edit_refresh"
-        android:layout_width="293dp"
-        android:layout_height="215dp"
-        android:layout_marginTop="132dp"
+        android:id="@+id/edit_TokenDeeplink"
+        android:layout_width="306dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="196dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/result" />
+
+    <Button
+        android:id="@+id/btn_pay"
+        android:layout_width="158dp"
+        android:layout_height="51dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="16dp"
+        android:text="Pay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.941"
+        app:layout_constraintStart_toEndOf="@+id/btn_Token" />
+
+    <TextView
+        android:id="@+id/edit_refresh"
+        android:layout_width="306dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="112dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/result" />
 
@@ -20,7 +43,7 @@
         android:id="@+id/sendreq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="84dp"
+        android:layout_marginBottom="72dp"
         android:text="Gen_Authcode"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,11 +52,12 @@
 
     <TextView
         android:id="@+id/result"
-        android:layout_width="310dp"
-        android:layout_height="118dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="305dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="32dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,10 +65,10 @@
         android:id="@+id/edit_Token"
         android:layout_width="293dp"
         android:layout_height="71dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintHorizontal_bias="0.432"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/result" />
 
@@ -53,10 +77,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="84dp"
+        android:layout_marginBottom="72dp"
         android:text="RefreshToken"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.962"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toEndOf="@+id/sendreq" />
+
+    <Button
+        android:id="@+id/btn_Token"
+        android:layout_width="152dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="16dp"
+        android:text="Gen_Token"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

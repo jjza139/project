@@ -1,0 +1,29 @@
+{
+  "transactionType": "PURCHASE",
+  "transactionSubType": ["BP"],
+  "sessionValidityPeriod": 160,
+  "sessionValidUntil": "",
+  "billPayment": {
+    "paymentAmount": 100,
+    "accountTo": "120191455539804",
+    "ref1": "ABCDEFGHIJ1234567890",
+    "ref2": "ABCDEFGHIJ1234567890",
+    "ref3": "ABCDEFGHIJ1234567890"
+  },
+  "merchantMetaData": {
+    "callbackUrl": "myapp://testapp",
+    "merchantInfo": {
+      "name": "SANDBOX MERCHANT NAME"
+    },
+    "extraData": {},
+    "paymentInfo": [
+      {
+        "type": "TEXT_WITH_IMAGE",
+        "title": "",
+        "header": "",
+        "description": "",
+        "imageUrl": ""
+      }
+    ]
+  }
+}

@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,21 +25,22 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class testapi extends AppCompatActivity {
-    private Button sendreq ,btn_refresh;
-    private TextView result,edit_Token,edit_refresh;
+    private Button sendreq ,btn_refresh,pay,btn_Token;
+    private TextView result,edit_Token,edit_refresh,edit_TokenDeeplink;
     private OkHttpClient client = new OkHttpClient();
     String token ="" ;
+    String token_deeplink ="" ;
     String refreshtoken="";
-    String b ="";
     String a = "";
+    String transactionId ="";
+    String userRefId ="";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.testapi);
 
-
-      // String code[] = data.split("=");
         result = findViewById(R.id.result);
+        edit_TokenDeeplink=findViewById(R.id.edit_TokenDeeplink);
         edit_Token = findViewById(R.id.edit_Token);
         edit_Token.setText("Token : "+token);
         edit_refresh = findViewById(R.id.edit_refresh);
@@ -49,6 +50,7 @@ public class testapi extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 get_auth();
+
             }
         });
         btn_refresh = findViewById(R.id.btn_refreshtoken);
@@ -56,13 +58,32 @@ public class testapi extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 post_refreshtoken(refreshtoken);
+
             }
         });
+
+        pay=findViewById(R.id.btn_pay);
+        pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                post_deeplink(token_deeplink);
+            }
+        });
+
+        btn_Token=findViewById(R.id.btn_Token);
+        btn_Token.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                post_auth();
+            }
+        });
+
 
     }
     private void updata_data(){
         edit_Token.setText("Token : "+token);
         edit_refresh.setText("Token Refresh: "+refreshtoken);
+        edit_TokenDeeplink.setText("Token Deeplink:" +token_deeplink);
     }
 
     private void update_code(){
@@ -72,6 +93,11 @@ public class testapi extends AppCompatActivity {
             if(code[1].length() > 30){
                 result.setText("Authcode: "+code[1]);
                 post_token(code[1]);
+            }else{
+                //pay Success
+                result.setText(code[1]);
+                updata_data();
+                get_transaction(transactionId,token);
             }
 
         }catch (Exception e){
@@ -117,7 +143,15 @@ public class testapi extends AppCompatActivity {
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                result.setText(response.body().string());
+                a=response.body().string();
+                try {
+                    JSONObject json = new JSONObject(a);
+                    JSONObject data = new JSONObject(json.getString("data"));
+                    token_deeplink= data.getString("accessToken");
+                    updata_data();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -249,6 +283,109 @@ public class testapi extends AppCompatActivity {
 
 //                result.setText(a);
 
+
+            }
+        });
+
+    }
+
+
+    private void post_deeplink(String Bearer) {
+        //[code request api ]
+        // [Code create json and body]
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        JSONObject main = new JSONObject();
+        JSONArray bp =new JSONArray();
+        JSONObject bill = new JSONObject();
+        JSONObject merchant = new JSONObject();
+        JSONObject merchantinfo = new JSONObject();
+
+        try {
+            bp.put("BP");
+            main.put("transactionType", "PURCHASE");
+            main.put("transactionSubType", bp);
+            main.put("sessionValidityPeriod",160);
+            main.put("sessionValidUntil","");
+            bill.put("paymentAmount",100);
+            bill.put("accountTo","120191455539804");
+            bill.put("ref1","a");
+            bill.put("ref2","b");
+            bill.put("ref3","c");
+            main.put("billPayment",bill);
+
+            merchant.put("callbackUrl","myapp://testapp");
+            merchantinfo.put("name","SANDBOX MERCHANT NAME");
+            merchant.put("merchantInfo",merchantinfo);
+            main.put("merchantMetaData",merchant);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+//        edit_refresh.setText(main.toString());
+        RequestBody body = RequestBody.create(JSON, main.toString());
+        Request request = new Request.Builder()
+                .url("https://api-sandbox.partners.scb/partners/sandbox/v3/deeplink/transactions")
+                .post(body)
+                .header("Content-Type", "application/json")
+                .addHeader("authorization","Bearer "+Bearer)
+                .addHeader("resourceOwnerId", "l7b26b44c713e746dfa96fca5e635ca566")
+                .addHeader("requestUId", "{{$guid}}")
+                .addHeader("channel","scbeasy")
+                .addHeader("accept-language", "EN")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) { }
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                a=response.body().string();
+                try {
+                    JSONObject json = new JSONObject(a);
+                    JSONObject data = new JSONObject(json.getString("data"));
+                    transactionId= data.getString("transactionId");
+                    userRefId=data.getString("userRefId");
+                    go2scb(data.getString("deeplinkUrl"));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+    }
+
+    private void get_transaction(String transactionId ,String token) {
+        //[code request api ]
+        Request request = new Request.Builder()
+                .url("https://api-sandbox.partners.scb/partners/sandbox/v2/transactions/"+transactionId)
+                .header("authorization", "Bearer "+token)
+                .addHeader("resourceOwnerId", "l7b26b44c713e746dfa96fca5e635ca566")
+                .addHeader("requestUId", "{{$guid}}")
+                .addHeader("accept-language", "EN")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) { }
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                a=response.body().string();
+                try {
+                    JSONObject json = new JSONObject(a);
+                    JSONObject data = new JSONObject(json.getString("data"));
+                    String account =data.getString("accountFrom");
+                    String paid =data.getString("paidAmount");
+                    result.setText("Account : "+account+"\nPaid : "+paid);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                // a=response.body().string();
 
             }
         });
