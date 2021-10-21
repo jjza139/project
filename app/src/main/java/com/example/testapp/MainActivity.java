@@ -65,8 +65,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void checkCurrentUser(FirebaseUser user) {
         // [START check_current_user]
         if(user != null){
-            //sendUsertoCenter();
-            sendUsertoapi();
+            sendUsertoCenter();
+//            sendUsertoapi();
         }
 
         // [END check_current_user]

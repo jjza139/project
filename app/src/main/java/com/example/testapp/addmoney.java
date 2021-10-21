@@ -7,13 +7,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
-import static com.example.testapp.center.Money;
+import static com.example.testapp.center.*;
 
 
 public class addmoney extends Fragment {
-    public TextView money;
+    public TextView money ,Text_amont;
+    private Button btn_confirm;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -22,6 +24,14 @@ public class addmoney extends Fragment {
         View v = inflater.inflate(R.layout.fragment_addmoney, container, false);
         money = (TextView) v.findViewById(R.id.money);
         money.setText(Integer.toString(Money)+".00 THB");
+        Text_amont =v.findViewById(R.id.Text_amont);
+        btn_confirm=v.findViewById(R.id.btn_confirm);
+        btn_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Text_amont.setText(Status);
+            }
+        });
         return v;
     }
 }

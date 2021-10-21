@@ -6,8 +6,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -25,6 +36,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class testapi extends AppCompatActivity {
+    private FirebaseUser uAuth;
+    private String UserId;
+
     private Button sendreq ,btn_refresh,pay,btn_Token;
     private TextView result,edit_Token,edit_refresh,edit_TokenDeeplink;
     private OkHttpClient client = new OkHttpClient();
@@ -33,11 +47,14 @@ public class testapi extends AppCompatActivity {
     String refreshtoken="";
     String a = "";
     String transactionId ="";
-    String userRefId ="";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.testapi);
+
+        uAuth = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+        UserId = uAuth.getUid();
 
         result = findViewById(R.id.result);
         edit_TokenDeeplink=findViewById(R.id.edit_TokenDeeplink);
@@ -86,6 +103,7 @@ public class testapi extends AppCompatActivity {
         edit_TokenDeeplink.setText("Token Deeplink:" +token_deeplink);
     }
 
+
     private void update_code(){
         Intent intent = getIntent();
         try {
@@ -96,19 +114,40 @@ public class testapi extends AppCompatActivity {
             }else{
                 //pay Success
                 result.setText(code[1]);
-                updata_data();
-                get_transaction(transactionId,token);
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users/"+UserId+"/Transaction");
+                reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            try {
+                                JSONObject trans = new JSONObject(String.valueOf(task.getResult().getValue()));
+                                transactionId = trans.getString("Id");
+                                token_deeplink = trans.getString("token_deeplink");
+                                get_transaction(transactionId,token_deeplink);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }else{
+
+                        }
+
+                    }
+                });
+
             }
 
         }catch (Exception e){
             // result.setText(data);
 
         }
+
     }
 
     protected void onStart(){
         super.onStart();
         update_code();
+
     }
 
     private void post_auth() {
@@ -299,14 +338,14 @@ public class testapi extends AppCompatActivity {
         JSONObject bill = new JSONObject();
         JSONObject merchant = new JSONObject();
         JSONObject merchantinfo = new JSONObject();
-
+        int Amount = 100;
         try {
             bp.put("BP");
             main.put("transactionType", "PURCHASE");
             main.put("transactionSubType", bp);
             main.put("sessionValidityPeriod",160);
             main.put("sessionValidUntil","");
-            bill.put("paymentAmount",100);
+            bill.put("paymentAmount",Amount);
             bill.put("accountTo","120191455539804");
             bill.put("ref1","a");
             bill.put("ref2","b");
@@ -345,7 +384,9 @@ public class testapi extends AppCompatActivity {
                     JSONObject json = new JSONObject(a);
                     JSONObject data = new JSONObject(json.getString("data"));
                     transactionId= data.getString("transactionId");
-                    userRefId=data.getString("userRefId");
+                    FirebaseDatabase.getInstance().getReference("Users/"+UserId+"/Transaction/Id").setValue(transactionId);
+                    FirebaseDatabase.getInstance().getReference("Users/"+UserId+"/Transaction/token_deeplink").setValue(token_deeplink);
+                    FirebaseDatabase.getInstance().getReference("Users/"+UserId+"/Transaction/Amount").setValue(Amount);
                     go2scb(data.getString("deeplinkUrl"));
 
                 } catch (JSONException e) {
@@ -384,8 +425,6 @@ public class testapi extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-                // a=response.body().string();
 
             }
         });

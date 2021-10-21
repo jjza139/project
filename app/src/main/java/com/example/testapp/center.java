@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,8 +20,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class center extends AppCompatActivity {
-    public static String Username ,Email;
+    public static String Username ,Email,Status;
     public static int Money;
     // private View decorView;
     private FirebaseUser uAuth;
@@ -35,11 +40,11 @@ public class center extends AppCompatActivity {
         uAuth = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         UserId = uAuth.getUid();
+        updateuser();
 
-
-        Intent intent = getIntent();
-        String action = intent.getAction();
-        Uri data = intent.getData();
+//        Intent intent = getIntent();
+//        String action = intent.getAction();
+//        Uri data = intent.getData();
 
        // greeting = (TextView) findViewById(R.id.nameUser);
         BottomNavigationView bottomNav = findViewById(R.id.navigation);
@@ -49,11 +54,11 @@ public class center extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.home,
                     new home()).commit();
         }
-        updateuser();
+
 
     }
     private void updateuser(){
-        reference.child(UserId).addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child(UserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Userinfo userprofile = snapshot.getValue(Userinfo.class);
@@ -77,8 +82,29 @@ public class center extends AppCompatActivity {
     }
 
 
+    private void update_code(){
+        Intent intent = getIntent();
+        try {
+            String code[] = intent.getDataString().split("=");
+            if(code[1].length() > 30){
+                Status=code[1];
+                FirebaseDatabase.getInstance().getReference("Users/"+UserId+"/Transaction/Status").setValue(Status);
+            }else{
+                Status=code[1];
+                FirebaseDatabase.getInstance().getReference("Users/"+UserId+"/Transaction/Status").setValue(Status);
+            }
+
+        }catch (Exception e){
+            // result.setText(data);
+
+        }
+
+    }
+
+
     protected void onStart(){
         super.onStart();
+        update_code();
 
     }
 
