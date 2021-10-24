@@ -25,11 +25,14 @@ import org.json.JSONObject;
 
 public class center extends AppCompatActivity {
     public static String Username ,Email,Status;
-    public static int Money;
+    public static long Money ,Amount;
     // private View decorView;
     private FirebaseUser uAuth;
     private DatabaseReference reference;
     private String UserId;
+    api Test_api = new api();
+    String transactionId,token_deeplink;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,10 +91,56 @@ public class center extends AppCompatActivity {
             String code[] = intent.getDataString().split("=");
             if(code[1].length() > 30){
                 Status=code[1];
-                FirebaseDatabase.getInstance().getReference("Users/"+UserId+"/Transaction/Status").setValue(Status);
+//                FirebaseDatabase.getInstance().getReference("Transaction/"+UserId+"/Current/Status").setValue(Status);
             }else{
                 Status=code[1];
-                FirebaseDatabase.getInstance().getReference("Users/"+UserId+"/Transaction/Status").setValue(Status);
+//                Test_api.check_money();
+                FirebaseDatabase.getInstance().getReference("Transaction/"+UserId+"/Current/Status").setValue(Status);
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Transaction/"+UserId+"/Current");
+                reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            try {
+                                JSONObject trans = new JSONObject(String.valueOf(task.getResult().getValue()));
+                                Amount = Long.parseLong(trans.getString("Amount"));
+//                                transactionId = trans.getString("Id");
+//                                token_deeplink = trans.getString("token_deeplink");
+//                                Test_api.get_transaction(transactionId,token_deeplink);
+//                                FirebaseDatabase.getInstance().getReference("Users/"+UserId).child("money").setValue(trans.getString("Amount"));
+//                                Test_api.check_money();
+//                                FirebaseDatabase.getInstance().getReference("Users/"+UserId).child("money").setValue(Test_api.get_money()+Test_api.get_amount());
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }else{
+
+                        }
+
+                    }
+                });
+                DatabaseReference Ref_money = FirebaseDatabase.getInstance().getReference("Users/"+UserId);
+                Ref_money.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            try {
+                                JSONObject trans = new JSONObject(String.valueOf(task.getResult().getValue()));
+                                Money = Long.parseLong(trans.getString("money"));
+                                FirebaseDatabase.getInstance().getReference("Users/"+UserId).child("money").setValue(Money+Amount+5);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }else{
+
+                        }
+
+                    }
+                });
+
             }
 
         }catch (Exception e){
@@ -100,7 +149,6 @@ public class center extends AppCompatActivity {
         }
 
     }
-
 
     protected void onStart(){
         super.onStart();
@@ -114,9 +162,15 @@ public class center extends AppCompatActivity {
     public static String getEmail(){
         return Email;
     }
-    public static int getMoney(){
+    public static double getMoney(){
         return Money;
     }
+
+    public void go2scb(String Link) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Link));
+        startActivity(browserIntent);
+    }
+
     private void go2main(){
         startActivity(new Intent(this,MainActivity.class));
     }

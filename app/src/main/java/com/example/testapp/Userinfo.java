@@ -2,7 +2,8 @@ package com.example.testapp;
 
 public class Userinfo {
     public String name ,email,phone;
-    public int money ;
+    public long money ;
+    public String Car;
 
     public Userinfo(){}
 
@@ -11,6 +12,7 @@ public class Userinfo {
         this.email=email;
         this.phone=phone;
         this.money=0;
+        this.Car="";
 
     }
 

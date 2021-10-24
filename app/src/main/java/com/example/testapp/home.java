@@ -38,7 +38,7 @@ import static com.example.testapp.center.Username;
 
 public class home extends Fragment  {
     public static String Username ,Email;
-    public static int Money;
+    public static double Money;
     private DatabaseReference reference;
     private FirebaseUser uAuth;
     private String UserId;

@@ -24,7 +24,7 @@ public class qr extends Fragment {
         View v= inflater.inflate(R.layout.fragment_qr, container, false);
         money       =(TextView)v.findViewById(R.id.money);
         user_name   = (TextView) v.findViewById(R.id.User_Name);
-        money.setText(Integer.toString(Money)+".00 THB");
+        money.setText(Double.toString(Money)+" THB");
         user_name.setText(Username);
         return v;
     }

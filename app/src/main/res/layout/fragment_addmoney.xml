@@ -37,7 +37,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
         <EditText
-            android:id="@+id/cash"
+            android:id="@+id/Edit_Amount"
             android:layout_width="358dp"
             android:layout_height="55dp"
             android:layout_marginTop="16dp"
@@ -74,7 +74,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cash" />
+            app:layout_constraintTop_toBottomOf="@+id/Edit_Amount" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView12"

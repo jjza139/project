@@ -25,7 +25,7 @@ public class history extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_history, container, false);
         money = (TextView) v.findViewById(R.id.money);
-        money.setText(Integer.toString(Money)+".00 THB");
+        money.setText(Double.toString(Money)+" THB");
         return v;
     }
 
