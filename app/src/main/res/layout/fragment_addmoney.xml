@@ -96,10 +96,10 @@
 
                 <ImageView
                     android:id="@+id/account_payment"
-                    android:layout_width="80dp"
-                    android:layout_height="44dp"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
                     android:layout_marginStart="10dp"
-                    android:foreground="@drawable/mastercard"
+                    android:foreground="@drawable/scbsandbox"
                     android:src="@drawable/account"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
