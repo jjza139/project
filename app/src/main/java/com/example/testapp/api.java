@@ -1,7 +1,5 @@
 package com.example.testapp;
 
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -9,10 +7,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -20,7 +16,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.HttpCookie;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -40,6 +35,7 @@ public class api {
     String transactionId ="";
     String a = "";
     String deeplinkUrl ="";
+    public long paid;
     long amount,money;
 
 
@@ -56,6 +52,9 @@ public class api {
     }
     public long get_amount() {
         return amount;
+    }
+    public long get_paid() {
+        return paid;
     }
 
     String get_token_deeplink(){
@@ -132,7 +131,7 @@ public class api {
             bp.put("BP");
             main.put("transactionType", "PURCHASE");
             main.put("transactionSubType", bp);
-            main.put("sessionValidityPeriod",Amount);
+            main.put("sessionValidityPeriod",160);
             main.put("sessionValidUntil","");
             bill.put("paymentAmount",Amount);
             bill.put("accountTo","120191455539804");
@@ -189,6 +188,7 @@ public class api {
 
 
     public void get_transaction(String transactionId ,String token) {
+        check_money();
         //[code request api ]
         Request request = new Request.Builder()
                 .url("https://api-sandbox.partners.scb/partners/sandbox/v2/transactions/"+transactionId)
@@ -205,10 +205,20 @@ public class api {
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 a=response.body().string();
                 try {
+
+
                     JSONObject json = new JSONObject(a);
                     JSONObject data = new JSONObject(json.getString("data"));
+                    JSONObject bill = new JSONObject(data.getString("billPayment"));
                     String account =data.getString("accountFrom");
-                    String paid =data.getString("paidAmount");
+                     paid =Long.parseLong(bill.getString("paymentAmount"));
+
+                    FirebaseDatabase.getInstance().getReference("Users/"+UserId).child("money").setValue(paid+money);
+//                    [check]
+//                    FirebaseDatabase.getInstance().getReference("Test/"+UserId).child("id").setValue(transactionId);
+//                    FirebaseDatabase.getInstance().getReference("Test/"+UserId).child("token").setValue(token);
+//                    FirebaseDatabase.getInstance().getReference("Test/"+UserId).child("paid").setValue(paid);
+//                    FirebaseDatabase.getInstance().getReference("Test/"+UserId).child("money").setValue(money);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -216,46 +226,22 @@ public class api {
 
             }
         });
-
     }
 
 
-    public void check_money(){
-        DatabaseReference Ref_amount = FirebaseDatabase.getInstance().getReference("Transaction/"+UserId+"/Current");
-        Ref_amount.addValueEventListener(new ValueEventListener() {
+    private void check_money(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users/"+UserId+"/money");
+        reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                amount = (long) dataSnapshot.child("Amount").getValue();
-//                amount= Integer.parseInt(value);
-            }
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
 
-            @Override
-            public void onCancelled(DatabaseError error) {
+                money =Long.parseLong (String.valueOf(task.getResult().getValue()));
 
-            }
-        });
+                }
+            });
 
-        DatabaseReference Ref_money = FirebaseDatabase.getInstance().getReference("Users/"+UserId);
-        Ref_money.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                money = (long) dataSnapshot.child("money").getValue();
-//                amount= Integer.parseInt(value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-
-            }
-        });
-
-            long sum =money+amount;
-        FirebaseDatabase.getInstance().getReference("Users/"+UserId).child("money").setValue(sum);
 
     }
-
-
-
 
 
 

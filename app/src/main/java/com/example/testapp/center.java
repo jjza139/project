@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -25,7 +26,8 @@ import org.json.JSONObject;
 
 public class center extends AppCompatActivity {
     public static String Username ,Email,Status;
-    public static long Money ,Amount;
+    public static long Money ;
+     long Moneya ,Amount;
     // private View decorView;
     private FirebaseUser uAuth;
     private DatabaseReference reference;
@@ -103,44 +105,21 @@ public class center extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             try {
                                 JSONObject trans = new JSONObject(String.valueOf(task.getResult().getValue()));
-                                Amount = Long.parseLong(trans.getString("Amount"));
-//                                transactionId = trans.getString("Id");
-//                                token_deeplink = trans.getString("token_deeplink");
-//                                Test_api.get_transaction(transactionId,token_deeplink);
-//                                FirebaseDatabase.getInstance().getReference("Users/"+UserId).child("money").setValue(trans.getString("Amount"));
-//                                Test_api.check_money();
-//                                FirebaseDatabase.getInstance().getReference("Users/"+UserId).child("money").setValue(Test_api.get_money()+Test_api.get_amount());
-
+                                transactionId = trans.getString("Id");
+                                token_deeplink = trans.getString("token_deeplink");
+                                Test_api.get_transaction(transactionId,token_deeplink);
+                                Amount = Test_api.get_paid();
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+
                         }else{
 
                         }
 
                     }
                 });
-                DatabaseReference Ref_money = FirebaseDatabase.getInstance().getReference("Users/"+UserId);
-                Ref_money.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            try {
-                                JSONObject trans = new JSONObject(String.valueOf(task.getResult().getValue()));
-                                Money = Long.parseLong(trans.getString("money"));
-                                FirebaseDatabase.getInstance().getReference("Users/"+UserId).child("money").setValue(Money+Amount+5);
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }else{
-
-                        }
-
-                    }
-                });
-
             }
 
         }catch (Exception e){
