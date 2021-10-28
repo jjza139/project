@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="500.00 THB"
+                android:text="0.0 THB"
                 android:textColor="#171D33"
                 android:textSize="28sp"
                 android:textStyle="bold"
@@ -133,7 +133,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/text_user_name"
+                        android:id="@+id/text_user_name1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
@@ -152,8 +152,8 @@
                         android:text="กข 1234"
                         android:textColor="#757F8C"
                         app:layout_constraintEnd_toStartOf="@+id/guideline"
-                        app:layout_constraintStart_toStartOf="@+id/text_user_name"
-                        app:layout_constraintTop_toBottomOf="@+id/text_user_name" />
+                        app:layout_constraintStart_toStartOf="@+id/text_user_name1"
+                        app:layout_constraintTop_toBottomOf="@+id/text_user_name1" />
 
 
                     <TextView
@@ -166,7 +166,7 @@
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/text_date"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/text_user_name" />
+                        app:layout_constraintTop_toTopOf="@+id/text_user_name1" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline"
@@ -219,7 +219,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/text_user_name1"
+                        android:id="@+id/text_user_name2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
@@ -239,8 +239,8 @@
                         android:text="กข 1234"
                         android:textColor="#757F8C"
                         app:layout_constraintEnd_toStartOf="@+id/guideline1"
-                        app:layout_constraintStart_toStartOf="@+id/text_user_name1"
-                        app:layout_constraintTop_toBottomOf="@+id/text_user_name1" />
+                        app:layout_constraintStart_toStartOf="@+id/text_user_name2"
+                        app:layout_constraintTop_toBottomOf="@+id/text_user_name2" />
 
 
                     <TextView
@@ -253,7 +253,7 @@
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/text_date1"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/text_user_name1" />
+                        app:layout_constraintTop_toTopOf="@+id/text_user_name2" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline1"
@@ -305,7 +305,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/text_user_name2"
+                        android:id="@+id/text_user_name3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
@@ -324,8 +324,8 @@
                         android:text="กข 1234"
                         android:textColor="#757F8C"
                         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                        app:layout_constraintStart_toStartOf="@+id/text_user_name2"
-                        app:layout_constraintTop_toBottomOf="@+id/text_user_name2" />
+                        app:layout_constraintStart_toStartOf="@+id/text_user_name3"
+                        app:layout_constraintTop_toBottomOf="@+id/text_user_name3" />
 
 
                     <TextView
@@ -338,7 +338,7 @@
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/text_date2"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/text_user_name2" />
+                        app:layout_constraintTop_toTopOf="@+id/text_user_name3" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline2"
@@ -390,7 +390,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/text_user_name3"
+                        android:id="@+id/text_user_name4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
@@ -409,8 +409,8 @@
                         android:text="กข 1234"
                         android:textColor="#757F8C"
                         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                        app:layout_constraintStart_toStartOf="@+id/text_user_name3"
-                        app:layout_constraintTop_toBottomOf="@+id/text_user_name3" />
+                        app:layout_constraintStart_toStartOf="@+id/text_user_name4"
+                        app:layout_constraintTop_toBottomOf="@+id/text_user_name4" />
 
 
                     <TextView
@@ -423,7 +423,7 @@
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/text_date3"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/text_user_name3" />
+                        app:layout_constraintTop_toTopOf="@+id/text_user_name4" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline3"

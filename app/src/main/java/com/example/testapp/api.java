@@ -33,7 +33,7 @@ public class api {
 //    private TextView result,edit_Token,edit_refresh,edit_TokenDeeplink;
     private OkHttpClient client = new OkHttpClient();
     String transactionId ="";
-    String a = "";
+    String a = "" ,b="";
     String deeplinkUrl ="";
     public long paid;
     long amount,money;
@@ -57,7 +57,7 @@ public class api {
         return paid;
     }
 
-    String get_token_deeplink(){
+    public String get_token_deeplink(){
         return token_Deeplink;
     }
 
@@ -86,7 +86,6 @@ public class api {
                 .addHeader("resourceOwnerId", "l7b26b44c713e746dfa96fca5e635ca566")
                 .addHeader("requestUId", "{{$guid}}")
                 .addHeader("accept-language", "EN")
-
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -116,7 +115,11 @@ public class api {
 //        return token_Deeplink;
     }
 
-
+    public enum transactionType	 {
+        BP,
+        CCFA,
+        CCIPP
+    }
 
     public void post_deeplink(String Bearer,double Amount) {
         //[code request api ]
@@ -167,9 +170,9 @@ public class api {
             public void onFailure(@NotNull Call call, @NotNull IOException e) { }
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                a=response.body().string();
+                b=response.body().string();
                 try {
-                    JSONObject json = new JSONObject(a);
+                    JSONObject json = new JSONObject(b);
                     JSONObject data = new JSONObject(json.getString("data"));
                     transactionId= data.getString("transactionId");
                     FirebaseDatabase.getInstance().getReference("Transaction/"+UserId+"/Current/Id").setValue(transactionId);

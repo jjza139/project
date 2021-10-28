@@ -1,28 +1,25 @@
 package com.example.testapp;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 
 
 public class setpassword extends Fragment {
-    private TextView password,new_password,confirm_password;
+    private TextView new_password,confirm_password;
     private Button btn_reset;
     ImageView b;
 
@@ -30,7 +27,6 @@ public class setpassword extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_setpassword, container, false);
-        password = v.findViewById(R.id.current_password);
         new_password = v.findViewById(R.id.new_password);
         confirm_password = v.findViewById(R.id.confirm_password);
         b = (ImageView) v.findViewById(R.id.pass_back);
@@ -59,14 +55,8 @@ public class setpassword extends Fragment {
 
         // [START update_password]
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String currentPassword = password.getText().toString().trim();
         String newPassword = new_password.getText().toString().trim();
         String confirmPassword = confirm_password.getText().toString().trim();
-        if (currentPassword.isEmpty()|| currentPassword.length() < 6){
-            password.setError("Password is requied!");
-            password.requestFocus();
-            return;
-        }
         if (newPassword.isEmpty()|| newPassword.length() < 6){
             new_password.setError("Password is requied!");
             new_password.requestFocus();
