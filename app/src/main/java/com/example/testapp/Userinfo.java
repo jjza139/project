@@ -6,7 +6,23 @@ public class Userinfo {
 
     public Userinfo(){}
 
-    public Userinfo(String name,String email, String phone){
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public long getMoney() {
+        return money;
+    }
+
+    public Userinfo(String name, String email, String phone){
         this.name=name;
         this.email=email;
         this.phone=phone;

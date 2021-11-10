@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import static com.example.testapp.center.Money;
+import static java.lang.Long.parseLong;
 
 
 public class addmoney extends Fragment {
@@ -25,7 +26,7 @@ public class addmoney extends Fragment {
     private EditText Edit_Amount;
     private String token_Deeplink ="";
     private String Link="";
-    private double Amount;
+    private long Amount;
     private String UserId;
 
 
@@ -46,7 +47,7 @@ public class addmoney extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Amount = Double.parseDouble(Edit_Amount.getText().toString().trim());
+                Amount = parseLong(Edit_Amount.getText().toString().trim());
                 String token_Deeplink = Test_api.get_token_deeplink();
 
                 Test_api.post_deeplink(token_Deeplink,Amount);
@@ -70,9 +71,6 @@ public class addmoney extends Fragment {
             // Define what your app should do if no activity can handle the intent.
             e.getMessage().toString();
         }
-
     }
-
-
 
 }

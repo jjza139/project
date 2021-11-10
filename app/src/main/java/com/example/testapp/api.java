@@ -121,7 +121,7 @@ public class api {
         CCIPP
     }
 
-    public void post_deeplink(String Bearer,double Amount) {
+    public void post_deeplink(String Bearer,long Amount) {
         //[code request api ]
         // [Code create json and body]
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -138,9 +138,9 @@ public class api {
             main.put("sessionValidUntil","");
             bill.put("paymentAmount",Amount);
             bill.put("accountTo","120191455539804");
-            bill.put("ref1","a");
-            bill.put("ref2","b");
-            bill.put("ref3","c");
+            bill.put("ref1","midterm");
+            bill.put("ref2","Arinchai");
+            bill.put("ref3","Chutikan");
             main.put("billPayment",bill);
 
             merchant.put("callbackUrl","myapp://testapp");

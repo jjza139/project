@@ -3,15 +3,14 @@ package com.example.testapp;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,8 +31,6 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import static com.example.testapp.center.Username;
 
 
 public class home extends Fragment  {
@@ -72,9 +69,9 @@ public class home extends Fragment  {
                 Userinfo userprofile = snapshot.getValue(Userinfo.class);
 
                 if(userprofile != null) {
-                    Username = userprofile.name;
-                    Email = userprofile.email;
-                    Money = userprofile.money;
+                    Username = userprofile.getName();
+                    Email = userprofile.getEmail();
+                    Money = userprofile.getMoney();
                     greeting.setText(Username);
 
                 }else{
