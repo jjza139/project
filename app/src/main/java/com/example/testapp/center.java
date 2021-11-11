@@ -1,14 +1,13 @@
 package com.example.testapp;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,8 +24,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class center extends AppCompatActivity {
-    public static String Username ,Email,Status;
-    public static long Money ;
+    public static String Status;
+
      long Moneya ,Amount;
     // private View decorView;
     private FirebaseUser uAuth;
@@ -45,7 +44,7 @@ public class center extends AppCompatActivity {
         uAuth = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         UserId = uAuth.getUid();
-        updateuser();
+
 
 //        Intent intent = getIntent();
 //        String action = intent.getAction();
@@ -64,14 +63,16 @@ public class center extends AppCompatActivity {
     }
     private void updateuser(){
         reference.child(UserId).addValueEventListener(new ValueEventListener() {
+            private String Username,Email;
+            private long Money;
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Userinfo userprofile = snapshot.getValue(Userinfo.class);
 
                 if(userprofile != null) {
-                    Username = userprofile.name;
-                    Email = userprofile.email;
-                    Money = userprofile.money;
+                    Username = userprofile.getName();
+                    Email = userprofile.getEmail();
+                    Money = userprofile.getMoney();
                     //greeting.setText(Username);
 
                 }else{
@@ -135,16 +136,6 @@ public class center extends AppCompatActivity {
 
     }
 
-    public static String getName(){
-        return Username;
-    }
-    public static String getEmail(){
-        return Email;
-    }
-    public static double getMoney(){
-        return Money;
-    }
-
     public void go2scb(String Link) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Link));
         startActivity(browserIntent);
@@ -175,7 +166,6 @@ public class center extends AppCompatActivity {
                             selectedFragment = new user();
                             break;
                         default:
-                            updateuser();
                             selectedFragment = new home();
                             break;
                     }

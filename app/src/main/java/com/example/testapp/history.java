@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -22,16 +23,18 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static com.example.testapp.center.Money;
 
 public class history extends Fragment {
     public TextView  money ,username1,username2,username3,username4;
     RecyclerView recyclerView;
     DatabaseReference database;
     private FirebaseAuth firebaseAuth;
-    String UserID;
+    private DatabaseReference reference;
+    private String UserId;
+    private FirebaseUser uAuth;
     MyAdapter myAdapter;
     ArrayList<payinfo> list;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,13 +42,15 @@ public class history extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_history, container, false);
         firebaseAuth = FirebaseAuth.getInstance();
-        UserID = firebaseAuth.getUid();
+        uAuth = FirebaseAuth.getInstance().getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        UserId = uAuth.getUid();
         final FirebaseUser users = firebaseAuth.getCurrentUser();
         money = (TextView) v.findViewById(R.id.money);
-        money.setText(Double.toString(Money)+" THB");
+        updateuser();
 
         recyclerView = v.findViewById(R.id.view_history);
-        database = FirebaseDatabase.getInstance().getReference("pay/"+UserID);
+        database = FirebaseDatabase.getInstance().getReference("pay/"+UserId);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -74,6 +79,28 @@ public class history extends Fragment {
             }
         });
         return v;
+    }
+
+    private void updateuser(){
+        reference.child(UserId).addValueEventListener(new ValueEventListener() {
+            private long Money;
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Userinfo userprofile = snapshot.getValue(Userinfo.class);
+
+                if(userprofile != null) {
+                    Money = userprofile.getMoney();
+                    money.setText(Double.toString(Money) + " THB");
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getActivity(),"Failed",Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 

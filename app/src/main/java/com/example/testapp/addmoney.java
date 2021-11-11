@@ -10,13 +10,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import static com.example.testapp.center.Money;
 import static java.lang.Long.parseLong;
 
 
@@ -28,6 +34,8 @@ public class addmoney extends Fragment {
     private String Link="";
     private long Amount;
     private String UserId;
+    private DatabaseReference reference;
+    private FirebaseUser uAuth;
 
 
     @Override
@@ -36,10 +44,11 @@ public class addmoney extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_addmoney, container, false);
         api Test_api = new api();
-        FirebaseUser uAuth = FirebaseAuth.getInstance().getCurrentUser();
+        uAuth = FirebaseAuth.getInstance().getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
         UserId = uAuth.getUid();
         money = (TextView) v.findViewById(R.id.money);
-        money.setText(Double.toString(Money)+" THB");
+        updateuser();
         Edit_Amount =v.findViewById(R.id.Edit_Amount);
         Test_api.post_auth();
         btn_confirm=v.findViewById(R.id.btn_confirm);
@@ -71,6 +80,29 @@ public class addmoney extends Fragment {
             // Define what your app should do if no activity can handle the intent.
             e.getMessage().toString();
         }
+    }
+
+    private void updateuser(){
+        reference.child(UserId).addValueEventListener(new ValueEventListener() {
+            private long Money;
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Userinfo userprofile = snapshot.getValue(Userinfo.class);
+
+                if(userprofile != null) {
+                    Money = userprofile.getMoney();
+                    money.setText(Double.toString(Money) + " THB");
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getActivity(),"Failed",Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 }

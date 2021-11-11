@@ -34,8 +34,7 @@ import okhttp3.Response;
 
 
 public class home extends Fragment  {
-    public static String Username ,Email;
-    public static double Money;
+    public  String Username ;
     private DatabaseReference reference;
     private FirebaseUser uAuth;
     private String UserId;
@@ -48,7 +47,7 @@ public class home extends Fragment  {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         greeting = (TextView) v.findViewById(R.id.User_Name);
-
+        updateuser();
 
         return v;
 
@@ -56,7 +55,7 @@ public class home extends Fragment  {
 
     public void onStart() {
         super.onStart();
-        updateuser();
+
     }
 
     private void updateuser(){
@@ -70,8 +69,6 @@ public class home extends Fragment  {
 
                 if(userprofile != null) {
                     Username = userprofile.getName();
-                    Email = userprofile.getEmail();
-                    Money = userprofile.getMoney();
                     greeting.setText(Username);
 
                 }else{
