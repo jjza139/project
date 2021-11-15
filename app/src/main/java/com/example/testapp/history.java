@@ -65,6 +65,7 @@ public class history extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) { // check history
                     status.setVisibility(View.INVISIBLE);
+                    list.clear();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         payinfo user = dataSnapshot.getValue(payinfo.class);
                         list.add(user);
