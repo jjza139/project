@@ -206,7 +206,8 @@ public class api {
                     JSONObject data = new JSONObject(json.getString("data"));
                     JSONObject bill = new JSONObject(data.getString("billPayment"));
                     String account =data.getString("accountFrom");
-                     paid =Long.parseLong(bill.getString("paymentAmount"));
+                    paid =Long.parseLong(data.getString("paidAmount"));
+//                    paid =Long.parseLong(bill.getString("paymentAmount"));
 
                     FirebaseDatabase.getInstance().getReference("Users/"+UserId).child("money").setValue(paid+money);
 //                    [check]

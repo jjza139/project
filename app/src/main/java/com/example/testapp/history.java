@@ -25,7 +25,7 @@ import java.util.Collections;
 
 
 public class history extends Fragment {
-    public TextView  money ,username1,username2,username3,username4;
+    public TextView  money ,status;
     RecyclerView recyclerView;
     DatabaseReference database;
     private FirebaseAuth firebaseAuth;
@@ -41,6 +41,7 @@ public class history extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_history, container, false);
+        status =  v.findViewById(R.id.Text_status);
         firebaseAuth = FirebaseAuth.getInstance();
         uAuth = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
@@ -62,14 +63,22 @@ public class history extends Fragment {
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    payinfo user = dataSnapshot.getValue(payinfo.class);
-                    list.add(user);
+                if (snapshot.exists()) { // check history
+                    status.setVisibility(View.INVISIBLE);
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        payinfo user = dataSnapshot.getValue(payinfo.class);
+                        list.add(user);
+                    }
+                }else{
+                    list.clear();
+                    status.setVisibility(View.VISIBLE);
+                    Toast.makeText(getActivity(),"No",Toast.LENGTH_LONG).show();
 
                 }
+
                 Collections.reverse(list);
                 myAdapter.notifyDataSetChanged();
+
 
             }
 
