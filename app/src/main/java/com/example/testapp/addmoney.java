@@ -36,14 +36,14 @@ public class addmoney extends Fragment {
     private String UserId;
     private DatabaseReference reference;
     private FirebaseUser uAuth;
-
+    api Test_api = new api();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_addmoney, container, false);
-        api Test_api = new api();
+
         uAuth = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         UserId = uAuth.getUid();
@@ -51,16 +51,20 @@ public class addmoney extends Fragment {
         updateuser();
         Edit_Amount =v.findViewById(R.id.Edit_Amount);
         Test_api.post_auth();
+
         btn_confirm=v.findViewById(R.id.btn_confirm);
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                token_Deeplink = Test_api.getToken_Deeplink();
                 Amount = parseLong(Edit_Amount.getText().toString().trim());
-                String token_Deeplink = Test_api.get_token_deeplink();
-
                 Test_api.post_deeplink(token_Deeplink,Amount);
-                go2scb(Test_api.get_deeplinkUrl());
+                do {
+                    Link = Test_api.get_deeplinkUrl();
+                }while (Link=="");
+
+                go2scb(Link);
+
 
 //                Money=Test_api.get_money();
 //                Amount=Test_api.get_amount();

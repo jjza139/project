@@ -26,20 +26,19 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class api {
-    private FirebaseUser uAuth;
-    private String UserId;
-    private String token_Deeplink;
+    private final FirebaseUser uAuth;
+    private final String UserId;
+
+    public String token_Deeplink;
 //    private Button sendreq ,btn_refresh,pay,btn_Token;
 //    private TextView result,edit_Token,edit_refresh,edit_TokenDeeplink;
-    private OkHttpClient client = new OkHttpClient();
+    private final OkHttpClient client = new OkHttpClient();
     String transactionId ="";
     String a = "" ,b="";
     String deeplinkUrl ="";
+
     public long paid;
     long amount,money;
-
-
-
 
     api(){
         uAuth = FirebaseAuth.getInstance().getCurrentUser();
@@ -53,13 +52,10 @@ public class api {
     public long get_amount() {
         return amount;
     }
-    public long get_paid() {
-        return paid;
-    }
+    public long get_paid() { return paid; }
+    public String getToken_Deeplink() { return token_Deeplink; }
 
-    public String get_token_deeplink(){
-        return token_Deeplink;
-    }
+
 
     String get_deeplinkUrl(){
         return deeplinkUrl;
@@ -115,12 +111,6 @@ public class api {
 //        return token_Deeplink;
     }
 
-    public enum transactionType	 {
-        BP,
-        CCFA,
-        CCIPP
-    }
-
     public void post_deeplink(String Bearer,long Amount) {
         //[code request api ]
         // [Code create json and body]
@@ -153,6 +143,8 @@ public class api {
         }
 
 //        edit_refresh.setText(main.toString());
+
+
         RequestBody body = RequestBody.create(JSON, main.toString());
         Request request = new Request.Builder()
                 .url("https://api-sandbox.partners.scb/partners/sandbox/v3/deeplink/transactions")
