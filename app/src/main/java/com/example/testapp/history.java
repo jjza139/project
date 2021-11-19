@@ -73,8 +73,6 @@ public class history extends Fragment {
                 }else{
                     list.clear();
                     status.setVisibility(View.VISIBLE);
-                    Toast.makeText(getActivity(),"No",Toast.LENGTH_LONG).show();
-
                 }
 
                 Collections.reverse(list);

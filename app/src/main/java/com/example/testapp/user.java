@@ -56,7 +56,7 @@ public class user extends Fragment  {
         Intent intent = new Intent(getActivity(),MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-
+        getActivity().finish();
     }
 
     private void updateuser(){
@@ -73,10 +73,6 @@ public class user extends Fragment  {
                     Email=userprofile.getEmail();
                     user_name.setText(Username);
                     user_email.setText(Email);
-
-                    if (Money <=19){
-                        Toast.makeText(getActivity(),"เติมเงิน",Toast.LENGTH_LONG).show();
-                    }
                 }else{
 
                 }

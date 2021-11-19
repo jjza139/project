@@ -50,7 +50,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:21.0.1'
     implementation 'com.google.firebase:firebase-database:20.0.2'
     implementation 'com.google.firebase:firebase-analytics'
-
+    implementation 'com.google.firebase:firebase-messaging'
     //[code api ]
     // define a BOM and its version
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))
@@ -63,6 +63,7 @@ dependencies {
     implementation 'com.journeyapps:zxing-android-embedded:4.2.0'
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'com.google.zxing:core:3.2.1'
+    implementation 'com.google.firebase:firebase-messaging:23.0.0'
 
 
     testImplementation 'junit:junit:4.+'

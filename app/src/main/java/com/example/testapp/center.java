@@ -1,4 +1,5 @@
 package com.example.testapp;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,7 +17,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -103,9 +106,20 @@ public class center extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
         update_code();
+        onTokenRefresh();
 
     }
+    public void onTokenRefresh() {
+        // Get updated InstanceID token.
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<String> task) {
+                FirebaseDatabase.getInstance().getReference("Token/"+UserId).child("Token").setValue(task.getResult());
+            }
+        });
 
+
+    }
     public void go2scb(String Link) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Link));
         startActivity(browserIntent);
