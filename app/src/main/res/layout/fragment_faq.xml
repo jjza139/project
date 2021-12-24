@@ -36,15 +36,15 @@
 
         <TextView
             android:id="@+id/q1"
-            android:layout_width="250dp"
-            android:layout_height="34dp"
+            android:layout_width="253dp"
+            android:layout_height="65dp"
             android:layout_marginStart="68dp"
             android:layout_marginTop="48dp"
             android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
             android:drawablePadding="5dp"
-            android:text="Question1"
+            android:text="เมื่อแสกนคิวอาร์โค้ดแล้วข้อมูลไม่ตรงควรทำอย่างไร"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="68dp"
             android:layout_marginTop="15dp"
-            android:text="Answer1"
+            android:text="กลับไปช่องทางธรรมดา และแจ้งเจ้าหน้าที่โดยทันที"
             android:textColor="@color/black"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,14 +62,14 @@
 
         <TextView
             android:id="@+id/q2"
-            android:layout_width="250dp"
-            android:layout_height="34dp"
+            android:layout_width="253dp"
+            android:layout_height="62dp"
             android:layout_marginStart="68dp"
             android:layout_marginTop="20dp"
             android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
-            android:text="Question2"
+            android:text="หากต้องการเปลียนรหัสควรทำอย่างไร"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/a1" />
 
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="68dp"
             android:layout_marginTop="15dp"
-            android:text="Answer2"
+            android:text="สามารถเปลี่ยนได้ด้วยตนเองได้ในหน้า security"
             android:textColor="@color/black"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
@@ -87,14 +87,14 @@
 
         <TextView
             android:id="@+id/q3"
-            android:layout_width="250dp"
-            android:layout_height="34dp"
+            android:layout_width="253dp"
+            android:layout_height="78dp"
             android:layout_marginStart="68dp"
             android:layout_marginTop="20dp"
             android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
-            android:text="Question3"
+            android:text="หากเติมเงินแล้วยอดเงินไม่ตรงยอดที่เติมควรทำอย่างไร"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/a2" />
 
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="68dp"
             android:layout_marginTop="15dp"
-            android:text="Answer3"
+            android:text="ติดต่อเจ้าหน้าที่โดยทั้งที"
             android:textColor="@color/black"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
