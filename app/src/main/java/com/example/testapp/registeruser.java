@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class registeruser extends AppCompatActivity implements View.OnClickListener{
     private FirebaseAuth mAuth;
-    private EditText editname,editemail,editphone,editpassword;
+    private EditText editname,editemail,editphone,editpassword,editplate;
     private TextView singin,registerUser;
     private ProgressBar progressBar;
 
@@ -42,6 +42,7 @@ public class registeruser extends AppCompatActivity implements View.OnClickListe
         editemail = (EditText) findViewById(R.id.editEmailAddress);
         editphone = (EditText) findViewById(R.id.editPhone);
         editpassword = (EditText) findViewById(R.id.editPassword);
+        editplate =(EditText) findViewById(R.id.editplate);
     }
 
     public void onClick(View v){
@@ -62,6 +63,7 @@ public class registeruser extends AppCompatActivity implements View.OnClickListe
         String password =editpassword.getText().toString().trim();
         String email =editemail.getText().toString().trim();
         String phone =editphone.getText().toString().trim();
+        String plate =editplate.getText().toString().trim();
 
         if (Name.isEmpty()){
             editname.setError("Name is requied!");
@@ -76,6 +78,11 @@ public class registeruser extends AppCompatActivity implements View.OnClickListe
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             editemail.setError("Please provide valid email!");
             editemail.requestFocus();
+            return;
+        }
+        if (plate.isEmpty()){
+            editplate.setError("License is requied!");
+            editplate.requestFocus();
             return;
         }
         if (phone.isEmpty() || phone.length() < 10){
@@ -97,7 +104,7 @@ public class registeruser extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if(task.isSuccessful()){
-                            Userinfo user = new Userinfo(Name,email,phone);
+                            Userinfo user = new Userinfo(Name,email,phone,plate);
 
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

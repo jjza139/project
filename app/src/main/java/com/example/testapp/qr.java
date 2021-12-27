@@ -79,7 +79,11 @@ public class qr extends Fragment {
                     user_name.setText(Username);
                     money.setText(Long.toString(Money) + " THB");
                     if (Money <=0){
-                        Toast.makeText(getActivity(),"เติมเงิน",Toast.LENGTH_LONG).show();
+//                        FragmentManager fragmentManager = getFragmentManager();
+//                        Fragment selectedFragment = new addmoney();
+//                        fragmentManager.beginTransaction().replace(R.id.home,
+//                                selectedFragment).addToBackStack(null).commit();
+//                        Toast.makeText(getActivity(),"เติมเงิน",Toast.LENGTH_LONG).show();
                     }
                 }else{
 

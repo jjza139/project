@@ -24,8 +24,8 @@
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="107dp"
-            android:layout_height="64dp"
+            android:layout_width="126dp"
+            android:layout_height="74dp"
             android:layout_marginTop="44dp"
             android:text="FAQ"
             android:textColor="@color/black"
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="68dp"
             android:layout_marginTop="15dp"
-            android:text="ติดต่อเจ้าหน้าที่โดยทั้งที"
+            android:text="ติดต่อเจ้าหน้าที่โดยทันที"
             android:textColor="@color/black"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"

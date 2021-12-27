@@ -35,6 +35,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         payinfo user = list.get(position);
         holder.Name.setText(user.getName());
         holder.Money.setText(String.valueOf(user.getMoney())+".00฿");
+        holder.plate.setText(user.getPlate());
         holder.Time.setText(user.getTime());
 
 
@@ -47,13 +48,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView Name, Time, Money;
+        TextView Name, Time, Money,plate;
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             Time = itemView.findViewById(R.id.Text_time);
             Name = itemView.findViewById(R.id.Text_name);
+            plate =itemView.findViewById(R.id.Text_plate);
             Money = itemView.findViewById(R.id.Text_money);
 
 

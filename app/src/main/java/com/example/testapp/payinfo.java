@@ -3,7 +3,7 @@ package com.example.testapp;
 public class payinfo
 {
 
-    String name, time;
+    String name, time,plate;
     long money ;
 
     public String getName() {
@@ -12,6 +12,10 @@ public class payinfo
 
     public String getTime() {
         return time;
+    }
+
+    public String getPlate() {
+        return plate;
     }
 
     public long getMoney() {

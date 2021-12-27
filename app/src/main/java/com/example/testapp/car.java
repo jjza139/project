@@ -8,17 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.annotations.NotNull;
 
 public class car extends Fragment {
     private FirebaseUser uAuth;
@@ -59,8 +54,15 @@ public class car extends Fragment {
     }
 
     private void a(){
+        Ref_plate =FirebaseDatabase.getInstance().getReference("Users/"+UserId);
+        String plate = editplate.getText().toString().trim();
+        if (plate.isEmpty()){
+            editplate.setError("email is requied!");
+            editplate.requestFocus();
+            return;
+        }
+        Ref_plate.child("plate").setValue(plate);
 
-        Ref_plate =FirebaseDatabase.getInstance().getReference("Car/"+UserId);
         //[check last]
 //        Query last = Ref_plate.orderByChild("plate").limitToLast(1);
 //        last.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -75,20 +77,22 @@ public class car extends Fragment {
 //            }
 //        });
 
-        Ref_plate.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    count_id= snapshot.getChildrenCount();
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-            }
-        });
-        String plate = editplate.getText().toString().trim();
-        Ref_plate.child((String.valueOf(count_id+1))).child("plate").setValue(plate);
+//        Ref_plate =FirebaseDatabase.getInstance().getReference("Car/"+UserId);
+//        Ref_plate.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//                if (snapshot.exists()) {
+//                    count_id= snapshot.getChildrenCount();
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//            }
+//        });
+//        String plate = editplate.getText().toString().trim();
+//        Ref_plate.child((String.valueOf(count_id+1))).child("plate").setValue(plate);
 
 
 

@@ -43,7 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
                     android:gravity="center"
-                    android:text="Registration Number"
+                    android:text="Change plate"
                     android:textColor="#FFFFFF"
                     android:textSize="30dp"
                     android:textStyle="bold" />
@@ -59,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:layout_gravity="center"
-                    android:text="Please enter registration number"
+                    android:text="Please enter plate"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
 
@@ -77,7 +77,7 @@
                         android:layout_width="20dp"
                         android:layout_height="50dp"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_baseline_add_24" />
+                        android:src="@drawable/ic_baseline_swap_horiz_24" />
 
                     <EditText
                         android:id="@+id/editplate"
@@ -102,7 +102,7 @@
                         android:layout_marginEnd="5dp"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
-                        android:text="ok"
+                        android:text="change"
                         android:textColor="#03A9F4"
                         app:backgroundTint="#FFFFFF" />
 

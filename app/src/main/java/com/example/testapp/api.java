@@ -28,7 +28,6 @@ import okhttp3.Response;
 public class api {
     private final FirebaseUser uAuth;
     private final String UserId;
-
     public String token_Deeplink;
 //    private Button sendreq ,btn_refresh,pay,btn_Token;
 //    private TextView result,edit_Token,edit_refresh,edit_TokenDeeplink;
@@ -128,7 +127,7 @@ public class api {
             main.put("sessionValidUntil","");
             bill.put("paymentAmount",Amount);
             bill.put("accountTo","120191455539804");
-            bill.put("ref1","midterm");
+            bill.put("ref1","final");
             bill.put("ref2","Arinchai");
             bill.put("ref3","Chutikan");
             main.put("billPayment",bill);

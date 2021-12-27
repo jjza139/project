@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class user extends Fragment  {
-    public TextView user_name,user_email ;
+    public TextView user_name,user_email ,user_car;
     private FirebaseAuth mAuth;
     private DatabaseReference reference;
     private String UserId;
@@ -44,6 +44,7 @@ public class user extends Fragment  {
         mAuth = FirebaseAuth.getInstance();
         user_name = (TextView) v.findViewById(R.id.User_Name);
         user_email = (TextView) v.findViewById(R.id.User_email);
+        user_car=(TextView) v.findViewById(R.id.user_car);
         updateuser();
         NavigationView  Nav2 = v.findViewById(R.id.navigationview);
         Nav2.setNavigationItemSelectedListener(navListener);
@@ -62,7 +63,7 @@ public class user extends Fragment  {
     private void updateuser(){
         reference.child(UserId).addValueEventListener(new ValueEventListener() {
             private long Money;
-            private String  Username,Email;
+            private String  Username,Email,Car;
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Userinfo userprofile = snapshot.getValue(Userinfo.class);
@@ -70,9 +71,11 @@ public class user extends Fragment  {
                 if(userprofile != null) {
                     Username = userprofile.getName();
                     Money = userprofile.getMoney();
+                    Car=userprofile.getPlate();
                     Email=userprofile.getEmail();
                     user_name.setText(Username);
                     user_email.setText(Email);
+                    user_car.setText(Car);
                 }else{
 
                 }

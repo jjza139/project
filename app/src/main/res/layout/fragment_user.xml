@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/user"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:context=".user">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="0dp">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -33,9 +34,9 @@
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="359dp"
-                    android:layout_height="74dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_width="363dp"
+                    android:layout_height="109dp"
+                    android:layout_marginStart="5dp"
                     android:layout_marginEnd="8dp"
                     android:paddingRight="300dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -48,21 +49,35 @@
                     android:id="@+id/User_email"
                     android:layout_width="271dp"
                     android:layout_height="23dp"
-                    android:layout_marginStart="64dp"
+                    android:layout_marginStart="76dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="2dp"
                     android:drawableLeft="@drawable/ic_baseline_email"
                     android:drawablePadding="5dp"
                     android:text="Email"
                     android:textColor="@color/black"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/user_car"
                     app:layout_constraintStart_toStartOf="@+id/imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/User_Name"
-                    app:layout_constraintVertical_bias="0.125" />
+                    app:layout_constraintTop_toBottomOf="@+id/User_Name" />
+
+                <TextView
+                    android:id="@+id/user_car"
+                    android:layout_width="271dp"
+                    android:layout_height="23dp"
+                    android:layout_marginStart="76dp"
+                    android:layout_marginTop="2dp"
+                    android:drawableLeft="@drawable/ic_baseline_directions_car_24"
+                    android:drawablePadding="5dp"
+                    android:text="car"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="@+id/imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/User_email" />
 
                 <TextView
                     android:id="@+id/User_Name"
                     android:layout_width="181dp"
                     android:layout_height="22dp"
-                    android:layout_marginStart="64dp"
+                    android:layout_marginStart="76dp"
                     android:layout_marginTop="8dp"
                     android:text="Full name"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -77,14 +92,16 @@
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigationview"
-            android:layout_width="415dp"
-            android:layout_height="560dp"
+            android:layout_width="0dp"
+            android:layout_height="542dp"
             app:itemBackground="@drawable/item_bg"
             app:itemIconTint="@color/black"
             app:itemTextColor="#000000"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:layout_constraintVertical_bias="0.0"
             app:menu="@menu/activity_main_drawer" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
