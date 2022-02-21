@@ -20,18 +20,44 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="360dp"
-            android:layout_height="100dp"
+            android:layout_height="130dp"
             android:padding="16dp">
 
+
+            <TextView
+                android:id="@+id/Text_timeout"
+                android:layout_width="148dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="20dp"
+                android:text="time_out"
+                android:textColor="#757F8C"
+                app:layout_constraintEnd_toStartOf="@+id/guideline1"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/image_car"
+                app:layout_constraintTop_toBottomOf="@+id/Text_timein" />
+
+            <ImageView
+                android:id="@+id/image_time2"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="6dp"
+                android:src="@drawable/ic_outline_schedule_24"
+                app:layout_constraintStart_toEndOf="@+id/image_user1"
+                app:layout_constraintTop_toBottomOf="@+id/Text_timein" />
 
             <ImageView
                 android:id="@+id/image_user1"
                 android:layout_width="49dp"
                 android:layout_height="55dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginStart="8dp"
                 android:src="@drawable/account"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.506" />
 
             <TextView
                 android:id="@+id/Text_name"
@@ -63,25 +89,35 @@
                 app:layout_constraintTop_toBottomOf="@+id/Text_name" />
 
             <TextView
-                android:id="@+id/Text_time"
+                android:id="@+id/Text_timein"
                 android:layout_width="148dp"
                 android:layout_height="18dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="6dp"
                 android:layout_marginEnd="20dp"
-                android:text="time"
+                android:text="time_in"
                 android:textColor="#757F8C"
                 app:layout_constraintEnd_toStartOf="@+id/guideline1"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/image_car"
                 app:layout_constraintTop_toBottomOf="@+id/Text_plate" />
 
+            <ImageView
+                android:id="@+id/image_time"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="6dp"
+                android:src="@drawable/ic_outline_schedule_24"
+                app:layout_constraintStart_toEndOf="@+id/image_user1"
+                app:layout_constraintTop_toBottomOf="@+id/Text_plate" />
+
             <TextView
                 android:id="@+id/Text_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="24dp"
                 android:text="0.00"
                 android:textColor="#FA2E69"
                 android:textSize="20sp"
@@ -105,16 +141,6 @@
                 android:src="@drawable/ic_baseline_directions_car_24"
                 app:layout_constraintStart_toEndOf="@+id/image_user1"
                 app:layout_constraintTop_toBottomOf="@+id/Text_name" />
-
-            <ImageView
-                android:id="@+id/image_time"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="6dp"
-                android:src="@drawable/ic_outline_schedule_24"
-                app:layout_constraintStart_toEndOf="@+id/image_user1"
-                app:layout_constraintTop_toBottomOf="@+id/Text_plate" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

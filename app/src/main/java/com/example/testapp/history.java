@@ -68,7 +68,10 @@ public class history extends Fragment {
                     list.clear();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         payinfo user = dataSnapshot.getValue(payinfo.class);
-                        list.add(user);
+                        String status  = user.getStatus();
+                        if(status.equals("success")) {
+                            list.add(user);
+                        }
                     }
                 }else{
                     list.clear();
